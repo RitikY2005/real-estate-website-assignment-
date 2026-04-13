@@ -1,0 +1,15 @@
+# Environment Variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Dependencies
+*/node_modules
+*/jspm_packages
+
+#Build files 
+*/build 
+*/out 
+*/dist
