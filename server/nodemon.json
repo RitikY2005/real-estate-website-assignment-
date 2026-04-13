@@ -2,5 +2,6 @@
   "watch": ["src"],
   "ext": "js,json",
   "ignore": ["*.test.js", "node_modules"],
-  "delay": "2500" 
+  "exec":"node server.js",
+  "delay": "500" 
 }

@@ -1,6 +1,6 @@
 class customError extends Error{
     
-    customError(message="Something went wrong",code=500){
+    constructor(message="Something went wrong",code=500){
         super(message);
         this.statusCode=code;
 
