@@ -1,0 +1,27 @@
+<svg width="260" height="140" viewBox="0 0 260 140" xmlns="http://www.w3.org/2000/svg">
+
+  <!-- Circle -->
+  <circle cx="130" cy="50" r="35" stroke="#fff" stroke-width="4" fill="none"/>
+
+  <!-- Roof Shape -->
+  <path d="M105 60 L130 40 L155 60" stroke="#fff" stroke-width="4" fill="none"/>
+
+  <!-- Inner Lines (structure style) -->
+  <line x1="115" y1="55" x2="115" y2="70" stroke="#fff" stroke-width="3"/>
+  <line x1="130" y1="50" x2="130" y2="70" stroke="#fff" stroke-width="3"/>
+  <line x1="145" y1="55" x2="145" y2="70" stroke="#fff" stroke-width="3"/>
+
+  <!-- Diagonal cut -->
+  <line x1="110" y1="75" x2="150" y2="35" stroke="#fff" stroke-width="3"/>
+
+  <!-- Text -->
+  <text x="130" y="105" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#fff" font-weight="bold">
+    LIME ROOFING
+  </text>
+
+  <!-- Tagline -->
+  <text x="130" y="122" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#fff">
+    PROTECTING YOUR HOME
+  </text>
+
+</svg>
