@@ -1,12 +1,14 @@
 import { useEffect, useState, useRef } from "react";
 import axiosInstance from "../utils/axios-util";
 import { Link } from 'react-router-dom';
+import HomePageSkeleton from "../components/home-page-skeleton";
 
 function HomePage() {
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [openIndex, setOpenIndex] = useState(null);
 
-    // Refs for scrolling
+    
     const heroRef = useRef(null);
     const overviewRef = useRef(null);
     const amenitiesRef = useRef(null);
@@ -32,7 +34,7 @@ function HomePage() {
         ref.current?.scrollIntoView({ behavior: "smooth" });
     };
 
-    if (loading) return <div className="p-10 text-center">Loading...</div>;
+    if (loading) return <HomePageSkeleton/>;
 
     return (
         <div className="font-sans">
@@ -68,7 +70,7 @@ function HomePage() {
             <div className="pt-20 space-y-20">
 
                 {/* hero part */}
-                <section ref={heroRef} className="relative w-full h-screen py-32">
+                <section ref={heroRef} className="relative w-full h-screen/2 pt-32">
 
                     {/* full size image  */}
                     <img
@@ -115,31 +117,77 @@ function HomePage() {
                 </section>
 
                 {/* PROJECT OVERVIEW */}
-                <section ref={overviewRef} className="px-6 grid md:grid-cols-2 gap-8 items-center">
-                    <img
-                        src={data.projectOverview.image}
-                        alt="overview"
-                        className="rounded-xl"
-                    />
+                <section
+                    ref={overviewRef}
+                    className="px-6 py-16 bg-[#dfeaea] grid md:grid-cols-2 gap-12 items-center"
+                >
 
+
+                    <div className="relative w-full flex justify-center">
+
+
+                        <img
+                            src="https://images.unsplash.com/photo-1505691938895-1758d7feb511"
+                            alt="main"
+                            className="w-[350px] h-[350px] object-cover rounded-full"
+                        />
+
+
+                        <img
+                            src="https://images.unsplash.com/photo-1493809842364-78817add7ffb"
+                            alt="small1"
+                            className="w-[120px] h-[120px] object-cover rounded-full border-4 border-white absolute top-[-20px] left-[30px]"
+                        />
+
+
+                        <img
+                            src="https://images.unsplash.com/photo-1507089947368-19c1da9775ae"
+                            alt="small2"
+                            className="w-[120px] h-[120px] object-cover rounded-full border-4 border-white absolute bottom-[-20px] right-[30px]"
+                        />
+
+                    </div>
+
+                    {/* text part */}
                     <div>
-                        <h2 className="text-2xl font-semibold mb-3">
-                            Project Overview
+                        <h2 className="text-3xl font-bold mb-4 text-gray-800">
+                            About Project
                         </h2>
-                        <p className="text-gray-600">
+
+                        <p className="text-gray-600 mb-4 leading-relaxed">
                             {data.projectOverview.description}
                         </p>
+
+                        <button className="bg-green-500 text-white px-6 py-2 rounded shadow hover:bg-green-600 transition">
+                            Download Brochure
+                        </button>
                     </div>
+
                 </section>
 
                 {/* CONNECTIVITY */}
-                <section className="px-6 text-center">
-                    <h2 className="text-2xl font-semibold mb-3">
+                <section className="px-6 py-20 bg-gradient-to-b from-white to-gray-50 text-center">
+
+                    <h2 className="text-4xl font-bold mb-4 text-gray-800">
                         Nearby Connectivity
                     </h2>
-                    <p className="text-gray-600 max-w-2xl mx-auto">
-                        {data.nearbyConnectivity.description}
-                    </p>
+
+                    <div className="w-20 h-1 bg-green-500 mx-auto mb-6 rounded"></div>
+
+                    {/* sepratae by comma here */}
+                    <div className="flex flex-wrap justify-center gap-4 max-w-3xl mx-auto">
+                        {data.nearbyConnectivity.description
+                            .split(",")
+                            .map((item, index) => (
+                                <span
+                                    key={index}
+                                    className="px-5 py-2 bg-white border border-gray-200 rounded-full shadow-sm text-gray-700 text-sm hover:bg-green-50 hover:border-green-400 transition"
+                                >
+                                    {item.trim()}
+                                </span>
+                            ))}
+                    </div>
+
                 </section>
 
                 {/* AMENITIES */}
@@ -177,45 +225,119 @@ function HomePage() {
                     </div>
                 </section>
 
-                {/* ABOUT */}
-                <section ref={aboutRef} className="px-6 text-center">
-                    <h2 className="text-2xl font-semibold mb-3">
+                {/* ABOUT DEVELOPER */}
+                <section ref={aboutRef} className="relative px-6 py-20 bg-[#dfeaea] text-center overflow-hidden">
+
+
+                    <h2 className="text-4xl font-bold mb-4 text-gray-800">
                         About Developer
                     </h2>
-                    <p className="text-gray-600 max-w-2xl mx-auto">
+
+
+                    <p className="text-gray-600 max-w-3xl mx-auto leading-relaxed mb-10">
                         {data.aboutUs.description}
                     </p>
+
+                    {/* hard coded stats */}
+                    <div className="max-w-4xl mx-auto bg-green-200 rounded-xl shadow-md py-6 px-4 grid grid-cols-2 md:grid-cols-5 gap-6 mb-16">
+
+                        <div>
+                            <h3 className="text-xl font-bold text-gray-800">6</h3>
+                            <p className="text-sm text-gray-600">Projects</p>
+                        </div>
+
+                        <div>
+                            <h3 className="text-xl font-bold text-gray-800">1.32 LAC</h3>
+                            <p className="text-sm text-gray-600">sq. ft. area developed</p>
+                        </div>
+
+                        <div>
+                            <h3 className="text-xl font-bold text-gray-800">449+</h3>
+                            <p className="text-sm text-gray-600">Happy Families</p>
+                        </div>
+
+                        <div>
+                            <h3 className="text-xl font-bold text-gray-800">3.77 LAC</h3>
+                            <p className="text-sm text-gray-600">sq. ft. ongoing</p>
+                        </div>
+
+                        <div>
+                            <h3 className="text-xl font-bold text-gray-800">2.7 LAC</h3>
+                            <p className="text-sm text-gray-600">sq. ft. upcoming</p>
+                        </div>
+
+                    </div>
+
+                    {/* CONSTRUCTION STATUS */}
+                    <div className="mb-12 flex justify-center">
+                        <span className="px-6 py-2 bg-green-100 text-green-800 font-semibold rounded-full shadow-sm">
+                            {data.constructionUpdates.label}
+                        </span>
+                    </div>
+
+
+
                 </section>
 
-                {/* CONSTRUCTION */}
-                <section className="px-6 text-center">
-                    <h2 className="text-2xl font-semibold mb-3">
-                        Construction Update
-                    </h2>
-                    <p className="text-green-600 font-medium">
-                        {data.constructionUpdates.label}
-                    </p>
-                </section>
+
 
                 {/* FAQ */}
-                <section ref={faqRef} className="px-6 max-w-3xl mx-auto">
-                    <h2 className="text-2xl font-semibold mb-6 text-center">
-                        FAQs
+                <section ref={faqRef} className="px-6 py-20 bg-gray-50">
+
+                    <h2 className="text-4xl font-bold mb-10 text-center text-gray-800">
+                        Frequently Asked Questions
                     </h2>
 
-                    <div className="space-y-4">
-                        {data.faqs.map((faq) => (
-                            <div key={faq._id} className="border rounded-lg p-4">
-                                <h3 className="font-medium">{faq.question}</h3>
-                                <p className="text-gray-600 text-sm mt-1">
-                                    {faq.answer}
-                                </p>
-                            </div>
-                        ))}
+                    <div className="max-w-3xl mx-auto space-y-4">
+                        {data.faqs.map((faq, index) => {
+    
+                            const isOpen = openIndex === index;
+
+                            return (
+                                <div
+                                    key={faq._id}
+                                    className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden transition"
+                                >
+                                    {/* Question */}
+                                    <button
+                                        onClick={() =>
+                                            setOpenIndex(isOpen ? null : index)
+                                        }
+                                        className="w-full flex justify-between items-center p-5 text-left"
+                                    >
+                                        <span className="font-semibold text-gray-800">
+                                            {faq.question}
+                                        </span>
+
+                                        <span
+                                            className={`transform transition ${isOpen ? "rotate-180" : ""
+                                                }`}
+                                        >
+                                            {isOpen?'-':'+'}
+                                        </span>
+                                    </button>
+
+                                    {/* Answer */}
+                                    <div
+                                        className={`px-5 overflow-hidden transition-all duration-300 ${isOpen ? "max-h-40 pb-5" : "max-h-0"
+                                            }`}
+                                    >
+                                        <p className="text-gray-600 text-sm leading-relaxed">
+                                            {faq.answer}
+                                        </p>
+                                    </div>
+                                </div>
+                            );
+                        })}
                     </div>
+
                 </section>
 
             </div>
+
+            <footer className="flex items-center justify-center py-10 text-sm">
+                &copy;{new Date().getFullYear()} All rights reserved 
+            </footer>
         </div>
     );
 }
