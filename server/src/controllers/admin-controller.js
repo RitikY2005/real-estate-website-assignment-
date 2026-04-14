@@ -50,7 +50,7 @@ export const updateContent=asyncHandler(async (req,res,next)=>{
     const updatedContent=await websiteContentModel.findOneAndUpdate(
         {},
         {$set:cleanedData},
-        {new:true,upsert:true} // will return the updated document , upsert -> creates a new document if none exist , good for initializing database
+        {returnDocument:'after',upsert:true} // will return the updated document , upsert -> creates a new document if none exist , good for initializing database
     );
 
     res.status(200).json({
