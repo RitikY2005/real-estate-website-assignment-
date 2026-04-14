@@ -3,6 +3,7 @@ import axiosInstance from "../utils/axios-util";
 import { toast } from 'react-hot-toast';
 import { useAuth } from '../context/auth-context';
 import { useNavigate } from 'react-router-dom';
+import AdminCmsSkeleton from "../components/admin-cms-skeleton";
 
 function AdminCmsPage() {
     const [formData, setFormData] = useState(null);
@@ -114,7 +115,7 @@ function AdminCmsPage() {
         }
     }, [isAdmin]);
 
-    if (loading || !formData) return <div className="p-6">Loading...</div>;
+    if (loading || !formData) return <AdminCmsSkeleton/>;
 
     return (
         <div className="flex min-h-screen bg-gray-100">
