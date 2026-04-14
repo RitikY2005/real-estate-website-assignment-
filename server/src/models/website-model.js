@@ -47,6 +47,11 @@ const websiteContentSchema=Schema({
 
     },
     projectOverview:{
+        image:{
+            type:String,
+            default:"https://static.vecteezy.com/system/resources/thumbnails/022/527/605/small/house-of-dream-idea-real-estate-illustration-ai-generative-free-photo.jpg"
+
+        },
         description:{
             type:String,
             default:"This project is built for you , let's get you a deal"
@@ -60,8 +65,15 @@ const websiteContentSchema=Schema({
     },
 
     amenities:{
-        type:[amenitySchema],
-        default:[]
+        image:{
+            type:String,
+            default:"https://static.vecteezy.com/system/resources/thumbnails/022/527/605/small/house-of-dream-idea-real-estate-illustration-ai-generative-free-photo.jpg"
+        },
+        items:{
+            type:[amenitySchema],
+            default:[]
+        }
+        
     },
     aboutUs:{
         description:{

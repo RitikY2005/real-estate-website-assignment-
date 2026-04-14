@@ -7,29 +7,40 @@ import cleanObject from '../utils/cleanObject.js';
 const cookieOptions={
     httpOnly:true,
     secure:NODE_ENV==="production"?true:false,
-    sameSite:"none",
+    sameSite:NODE_ENV==="production"?"none":"lax",
     maxAge:2*24*60*60*1000 ,// 2 DAYS 
 };
 
-export const login=asyncHandler((req,res,next)=>{
-    const {username,password} = req.body;
+export const login=asyncHandler(async (req,res,next)=>{
+    const {userName,password} = req.body;
+
+    console.log("Req body->",req.body);
     
-    if(!username || !password){
+    if(!userName || !password){
         return next(new customError('Please provide all the fields',400));
     }
 
-    if(username!=="admin" && password!="admin"){
+    if(userName!=="admin" || password!=="admin"){
         return res.status(401).json({
             success:false,
             message:"Invalid credentials"
         });
     } 
 
-    res.setCookie('token','this_is_cookie',cookieOptions);
+    res.cookie('token','this_is_cookie',cookieOptions);
 
     res.status(200).json({
             success:true,
             message:"login successful"
+    });
+});
+
+export const logout=asyncHandler(async (req,res,next)=>{
+    res.clearCookie('token',cookieOptions);
+    
+    res.status(200).json({
+            success:true,
+            message:"logged out"
         });
 });
 
